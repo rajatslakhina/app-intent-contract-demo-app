@@ -55,7 +55,7 @@ The chips across the top switch between the eight proposals. The verdicts below 
 ## Verification
 
 - **Simulator run:** not done (see [Screenshots](#screenshots)).
-- **CI:** not run yet at the time of writing. No Mac was available to this run, so none of the SwiftUI or App Intents code has been compiled by anyone yet: not `NotesIntents.swift`, not `DemoApp.swift`, and not the library's `ContractLabView`. The workflow defines one macOS 15 job. It resolves the package from GitHub (`xcodebuild -resolvePackageDependencies`), then builds the `Demo` scheme for `generic/platform=iOS Simulator` with signing disabled. When it passes, that will show the remote, version-pinned package resolves and the app (including the App Intents) compiles against it. It will not show that the app launches.
+- **CI ([Actions](https://github.com/rajatslakhina/app-intent-contract-demo-app/actions)):** the macOS 15 job passed on its first run (commit `539ce20`). It resolved `app-intent-contract-kit` from GitHub through the version range, which picks up the `v1.0.0` tag (`xcodebuild -resolvePackageDependencies`). It then built the `Demo` scheme for `generic/platform=iOS Simulator` with signing disabled, in Swift 6 language mode. So the remote package resolves, and the app compiles against it, including the real App Intents in `NotesIntents.swift` and the library's `ContractLabView`. It does **not** show that the app launches. That remains unverified, as stated above.
 - **Contract logic:** `NotesContract.swift` was compiled against the library on Linux (Swift 6.0.3, warnings as errors) with stub types standing in for the App Intents. The eight verdicts printed matched the table above. The library's own suite asserts the same table.
 
 ## Related
